@@ -1,0 +1,60 @@
+version: '3.8'
+
+# NETWORK CONF
+networks:
+  my-network:
+    driver: bridge
+  
+# VOLUMES CONF
+volumes:
+  dir-site:
+    driver_opts:
+      device: /mycode/sites/
+      o: bind
+
+# CONTAINERS CONF
+# Container 1
+services:
+  my-php:
+    container_name: php-product
+    build:
+      dockerfile: Dockerfile
+      context: ./php/
+    hostname: php
+    restart: always
+    networks:
+      - my-network
+    volumes:
+      - dir-site:/home/sites/
+
+# Container 2
+  my-httpd:
+    container_name: c-httpd
+    image: "httpd:lastest" # https://hub.docker.com/_/httpd
+    hostname: httpd
+    restart: always
+    networks:
+      - my-network
+    volumes:
+      - dir-site:/home/sites/
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+    ports:
+      - "9999:88" # http://localhost:9999
+      - "443:443"
+
+# Container 3
+  my-mysql:
+    container_name: mysql-product
+    image: "mysql:lastest" # https://hub.docker.com/_/httpd
+    hostname: mysql
+    restart: always
+    networks:
+      - my-network
+    volumes:
+      - ./db:/var/lib/mysql
+      - ./my.cnf:/etc/mysql-my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD: **** #Get variable from env file
+      - MYSQL_DATABASE: **** 
+      - MYSQL_USER: **** 
+      - MYSQL_PASSWORD: **** 
