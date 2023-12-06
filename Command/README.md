@@ -1,9 +1,19 @@
 ### Management Commands:
 
-`docker version`
 - Show Docker version information.
-`docker info`: Display system-wide information about Docker.
-`docker --help`: Display help information for Docker commands.
+```
+docker version
+```
+
+- Display system-wide information about Docker.
+```
+docker info
+```
+
+- Display help information for Docker commands.
+```
+docker --help
+```
 
 ### Image Commands:
 
