@@ -25,6 +25,11 @@ docker info
 docker --help
 ```
 
+Create a new image from a container's changes
+```
+docker commit <containerID> <imageName>:<version>
+```
+
 ### Image Commands:
 
 List all images on the local machine.
