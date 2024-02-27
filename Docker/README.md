@@ -5,6 +5,20 @@
 Readmore:
 [Docker CLI](https://github.com/docker/cli) | [Docker compose](https://github.com/docker/compose)
 
+### Jenkins Configuration Commands:
+
+-   Set up Jenkins.
+
+```
+docker run -d --name jenkins -p 8080:8080 -p 50000:50000 -v /Users/phuocnhat/Downloads/jenkins:/var/jenkins_home jenkins/jenkins:lts
+```
+
+-   Get Password Jenkins.
+
+```
+docker logs ContainerID
+```
+
 ### Management Commands:
 
 -   Show Docker version information.
